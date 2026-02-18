@@ -132,6 +132,8 @@ class ConsolColor:
         return finalColorEnd   
 
 class coordinate:
+    __slots__ = ["_x", "_y"]
+
     def __init__(self, longitude: Union[int, float], latitude: Union[int, float]) -> None:
         self._x: Union[int, float] = longitude
         self._y: Union[int, float] = latitude
@@ -156,6 +158,8 @@ class coordinate:
         return f"{self._x},{self._y}"
 
 class date:
+    __slots__ = ["_year", "_month", "_day"]
+
     def __init__(self, year: int, month: int, day: int) -> None:
         self._year: int = year
         self._month: int = month
