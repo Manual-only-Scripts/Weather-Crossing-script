@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+from typing import Union, Optional
 from colorama import Style
 from fpdf import FPDF
 import requests
@@ -131,24 +132,24 @@ class ConsolColor:
         return finalColorEnd   
 
 class coordinate:
-    def __init__(self, longitude: float, latitude: float) -> None:
-        self._x: float = longitude
-        self._y: float = latitude
+    def __init__(self, longitude: Union[int, float], latitude: Union[int, float]) -> None:
+        self._x: Union[int, float] = longitude
+        self._y: Union[int, float] = latitude
 
     @property
-    def longitude(self) -> float:
+    def longitude(self) -> Union[int, float]:
         return self._x
 
     @longitude.setter
-    def longitude(self, value: float):
+    def longitude(self, value: Union[int, float]):
         self._x = value
 
     @property
-    def latitude(self) -> float:
+    def latitude(self) -> Union[int, float]:
         return self._y
 
     @latitude.setter
-    def latitude(self, value: float):
+    def latitude(self, value: Union[int, float]):
         self._y = value
 
     def __str__(self) -> str:
@@ -245,7 +246,7 @@ def ask_for_unitGroup() -> str:
     
     return unit_group
 
-def ask_for_weather_parameters() -> list[str] | None:
+def ask_for_weather_parameters() -> Optional[list[str]]:
     option_list: list[str] = ["datetime","temp","tempmax","tempmin","dew","humidity","precip","windgust","windspeed","cloudcover","solarradiation","solarenergy","uvindex","visibility"]
     print(ConsolColor.PreSetUpColoredTextLine("What do you need from the list:", "s_color"))
     for optionIndex in range(len(option_list)):
@@ -294,7 +295,7 @@ def load_environment_file(file_path: str = ".env"):
 
 @timer
 @try_tester
-def load_env_variable(variable_name: str) -> str | None:
+def load_env_variable(variable_name: str) -> Optional[str]:
     print(ConsolColor.PreSetUpColoredTextLine(f"Loading environment variables: {variable_name}", "i_tips"))
     env_variable: str = str(os.getenv(variable_name))
 
@@ -349,6 +350,5 @@ def main():
 
         if can_go == "no":
             break
-
 
 main()
