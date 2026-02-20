@@ -1,5 +1,4 @@
 from dotenv import load_dotenv
-from typing import Union, Optional
 from colorama import Style
 from fpdf import FPDF
 import requests
@@ -134,24 +133,26 @@ class ConsolColor:
 class coordinate:
     __slots__ = ["_x", "_y"]
 
-    def __init__(self, longitude: Union[int, float], latitude: Union[int, float]) -> None:
-        self._x: Union[int, float] = longitude
-        self._y: Union[int, float] = latitude
+    type coordinateType = int | float
+
+    def __init__(self, longitude: coordinateType, latitude: coordinateType) -> None:
+        self._x: coordinate.coordinateType = longitude
+        self._y: coordinate.coordinateType = latitude
 
     @property
-    def longitude(self) -> Union[int, float]:
+    def longitude(self) -> coordinateType:
         return self._x
 
     @longitude.setter
-    def longitude(self, value: Union[int, float]):
+    def longitude(self, value: coordinateType):
         self._x = value
 
     @property
-    def latitude(self) -> Union[int, float]:
+    def latitude(self) -> coordinateType:
         return self._y
 
     @latitude.setter
-    def latitude(self, value: Union[int, float]):
+    def latitude(self, value: coordinateType):
         self._y = value
 
     def __str__(self) -> str:
@@ -250,7 +251,7 @@ def ask_for_unitGroup() -> str:
     
     return unit_group
 
-def ask_for_weather_parameters() -> Optional[list[str]]:
+def ask_for_weather_parameters() -> list[str] | None:
     option_list: list[str] = ["datetime","temp","tempmax","tempmin","dew","humidity","precip","windgust","windspeed","cloudcover","solarradiation","solarenergy","uvindex","visibility"]
     print(ConsolColor.PreSetUpColoredTextLine("What do you need from the list:", "s_color"))
     for optionIndex in range(len(option_list)):
@@ -299,7 +300,7 @@ def load_environment_file(file_path: str = ".env"):
 
 @timer
 @try_tester
-def load_env_variable(variable_name: str) -> Optional[str]:
+def load_env_variable(variable_name: str) -> str | None:
     print(ConsolColor.PreSetUpColoredTextLine(f"Loading environment variables: {variable_name}", "i_tips"))
     env_variable: str = str(os.getenv(variable_name))
 
