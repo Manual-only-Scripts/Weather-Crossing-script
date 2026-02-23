@@ -351,7 +351,7 @@ def load_env_variable(variable_name: str) -> str | None:
 def create_json_log_file(data):
     print(ConsolColor.PreSetUpColoredTextLine(f"Creating .json file for logging.", "i_tips"))
 
-    with open("weather_data_response.json", "w") as file:
+    with open(f"{load_env_variable('OUT_PATH')}weather_data_response.json", "w") as file:
         file.write(str(data).replace('\'', '"'))
 
 @timer
@@ -507,7 +507,7 @@ def create_pdf_report_file(data: dict):
         pdf.set_font("Courier", size=10)
         pdf.cell(0, 10, "Not yet implemented", ln=True)
 
-    pdf.output("weather_report.pdf")
+    pdf.output(f"{load_env_variable('OUT_PATH')}weather_report.pdf")
     print("PDF report created successfully as 'weather_report.pdf'.")
 
 @timer
@@ -528,7 +528,6 @@ def api_url(cordinates = ask_for_cordinate(), start_date = ask_for_date(), end_d
 @timer
 @try_tester
 def fetch_api():
-    load_environment_file()
     url: str = api_url()
     
     if url is None:
@@ -544,6 +543,15 @@ def fetch_api():
     return response.json()
 
 def main():
+    load_environment_file()
+
+    if os.path.exists(f"{load_env_variable('OUT_PATH')}") or os.makedirs(f"{load_env_variable('OUT_PATH')}"):
+        print(ConsolColor.PreSetUpColoredTextLine(f"Output directory is ready at: {load_env_variable('OUT_PATH')}", "success"))
+    
+    #else:
+    #    print(ConsolColor.PreSetUpColoredTextLine(f"Failed to create output directory at: {load_env_variable('OUT_PATH')}", "danger"))
+    #    os.makedirs(f"{load_env_variable('OUT_PATH')}")
+
     while True:
         match ask_for_logging_way():
             case ["pdf"]:
