@@ -274,7 +274,7 @@ def ask_for_weather_parameters() -> list[str] | None:
     else:
         try:
             selected_options: list[str] = []
-            selected_indices: list[int] = [int(x.strip()) for x in user_input.split(",")]
+            selected_indices: list[int] = [int(x.strip()) for x in user_input.split(",") or user_input.split(";")]
             for index in selected_indices:
                 if 1 <= index <= len(option_list):
                     selected_options.append(option_list[index - 1])
