@@ -1,92 +1,195 @@
-# This script helps with weather data analysis
+# Weather Crossing Script
 
-It provides functions to fetch weather data from a API. It uses the Visual Crossing Weather API.
-
-## Description
-
-This script allows users to fetch historical weather data for a specified location and date range using the Visual Crossing Weather API. It supports various weather parameters such as temperature, humidity, wind speed, and precipitation. The script is designed to be user-friendly and customizable, allowing users to specify their desired location, date range, and weather parameters. The fetched data is exported in JSON format for further analysis. For now this works for a hole month at a time. But upgrades are planned to support custom date ranges in the future or more export formats. More analysis features are also planned for future updates. Please refer to the installation instructions below to set up and run the script and note that this API may have usage limits based on your subscription plan.
+A modular, console‑driven Python tool for fetching, validating, and logging weather data using the Visual Crossing Weather API. The project focuses on clean architecture, reusable components, strong input validation, and color‑coded console feedback for a smooth user experience.
 
 ---
 
-## Version
+## 🌦️ Overview
 
-- v0.0.1 -> Initial pre-release with basic functionality to fetch and export weather data for a specified location and date range.
-- v0.0.2 -> A better verson because of the error handlers and specific types for the inputs.
-- v0.0.3 -> A way shorter version the main thing is good console logging and a better way to handel error.
+Weather Crossing Script is a command‑line application that guides the user through selecting coordinates, date ranges, unit systems, and weather parameters, then automatically builds a valid API request URL and fetches weather data. The script supports multiple output formats, environment‑based configuration, and structured error handling.
 
----
+The project is built with:
 
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone repository_url
-   ```
-
-2. Navigate to the project directory:
-
-    ```bash
-    cd project_directory
-    ```
-
-3. Install the required dependencies:
-
-    ```bash
-    pip install requests python-dotenv colorama fpdf
-    ```
-
-4. Set up your Visual Crossing Weather API key:
-    - Sign up for an account at [Visual Crossing](https://www.visualcrossing.com)
-    - Obtain your API key from the dashboard
-    - Create a `.env` file in the project directory and add your API key:
-
-    ``` ENV
-    API_URL="https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-    API_KEY=your_api_key_here
-    ```
-
-5. Run the script:
-
-    ```bash
-    python your_script_name.py
-    ```
-
-6. Output:
-    - The fetched weather data will be saved in a JSON file in the project directory. As weather_data_response.json.
+- Python 3.12+
+- Requests for API communication
+- python‑dotenv for environment variable loading
+- Colorama for colored console output
+- Custom decorators for timing and error handling
+- A modular folder structure for clarity and maintainability
 
 ---
 
-## Features
+## ✨ Features
 
-- Fetch historical weather data
-- Customizable date ranges
-- Customizable location input
-- Supports multiple weather parameters
-- Data export option (JSON)
-- Supports different units (metric/imperial)
-- Easy-to-use interface
-- Color-coded terminal output
-- Data validation and error handling
-- Logging functionality
-- User-friendly prompts
+- **Interactive input system**
+  - Coordinates (longitude & latitude)
+  - Date selection with calendar‑based validation
+  - Unit group selection (metric / imperial)
+  - Weather parameter selection (single, multiple, or all)
+
+- **Automatic URL generation**
+  - Uses environment variables (`API_URL`, `API_KEY`)
+  - Ensures all inputs are valid before constructing the request
+
+- **API request handling**
+  - Fetches weather data from Visual Crossing
+  - Validates HTTP response
+  - Returns parsed JSON
+
+- **Color‑coded console output**
+  - Tips, warnings, errors, success messages
+  - Fully customizable RGB or preset color themes
+
+- **Modular architecture**
+  - Easy to extend
+  - Clear separation of concerns
+  - Reusable utility classes
+
+---
+
+## 📁 Project Structure
+
+Weather-Crossing-script/
+│
+├── src/
+│   ├── classes/
+│   │   ├── ConsolColor.py
+│   │   ├── Coordinate.py
+│   │   └── Date.py
+│   │
+│   ├── exeptions/
+│   │   └── Exeptions.py
+│   │
+│   ├── env_loader/
+│   │   ├── Load_ENV_file.py
+│   │   └── Load_ENV_variable.py
+│   │
+│   ├── inputs/
+│   │   ├── simple/
+│   │   │   ├── Ask_Coordinate.py
+│   │   │   ├── Ask_Date.py
+│   │   │   └── Ask_UnitGroup.py
+│   │   └── complex/
+│   │       ├── Ask_Weather_Parameters.py
+│   │       └── Ask_Log_File_Extention.py
+│   │
+│   ├── url/
+│   │   └── URL_generator.py
+│   │
+│   ├── api/
+│   │   └── Fetch_API.py
+│   │
+│   └── wrappers/
+│       └── (timer, tryer decorators)
+│
+├── .env
+├── README.md
+└── requirements.txt
+
+Kód
+
+---
+
+---
+
+## ⚙️ Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/LemonShark20706/Weather-Crossing-script.git
+cd Weather-Crossing-script
+```
+
+### 2. Create a virtual environment (recommended)
+
+```bash
+python -m venv venv
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+
+Create a .env file in the project root:
+
+```bash
+API_URL=https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
+API_KEY=YOUR_API_KEY_HERE
+OUT_PATH=./output/
+```
+
+## 🚀 Usage
+
+Run the main script or any module that triggers the workflow:
+
+```bash
+python main.py
+```
+
+The program will guide you through:
+
+- Entering coordinates
+- Selecting start and end dates
+- Choosing unit group
+- Selecting weather parameters
+- Generating the API URL
+- Fetching and returning weather data
+
+All steps include color‑coded feedback and validation.
+
+## 🧩 Core Components
+
+### Input System
+
+Handles user input with validation and error handling.
+
+### URL Generator
+
+Builds a complete API request URL using validated inputs and environment variables.
+
+### API Fetcher
+
+Sends the request, checks the response, and returns JSON data.
+
+### Logging System
+
+Supports JSON output and is extendable for PDF or other formats.
+
+### Decorators
+
+- @timer — measures execution time
+- @tryer — wraps functions in a safe error‑handling layer
+
+## 🖌 Console Coloring
+
+The ConsolColor class provides:
+
+- Custom RGB coloring
+- Predefined semantic color themes
+- Start/end color wrappers
+
+Used throughout the project for clarity and UX.
+
+## 🛠 Planned Features
+
 - PDF report generation
+- CLI flags for non‑interactive mode
+- Weather data visualization
+- Async API calls
+- Unit tests
 
----
+## 🤝 Contributing
 
-## Requirements
+Contributions, suggestions, and improvements are welcome.
+Feel free to open issues or submit pull requests.
 
-- Python 3.x
-- requests library
-- calendar library
-- colorama library
-- dotenv library
-- fpdf library
-- os library
+## 📜 License
 
----
-
-## Links
-
-- [Visual Crossing](https://www.visualcrossing.com/)
-- [Visual Crossing Weather API](https://www.visualcrossing.com/weather-api)
+This project is released under the MIT License.
