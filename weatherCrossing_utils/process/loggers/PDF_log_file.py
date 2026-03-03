@@ -1,3 +1,50 @@
+"""
+Generates a structured PDF weather report from API response data.
+
+This module defines the `pdf_log_file` function, which transforms a weather API
+response into a multi‑page PDF document. The report includes a high‑level
+summary, aggregated statistics, and detailed per‑day tables. The function is
+decorated with `timer` and `tryer`, providing execution‑time measurement and
+safe error handling with colored console messages.
+
+Function
+--------
+pdf_log_file(data: dict):
+    Creates a PDF file named 'weather_report.pdf' in the directory specified by
+    the OUT_PATH environment variable. The function expects a dictionary
+    containing weather data in the structure returned by the API.
+
+    The generated PDF includes:
+    - A title page summarizing:
+        - Query cost
+        - Number of days in the dataset
+        - Location and timezone
+    - A dataset summary table showing average, maximum, and minimum values for
+        key weather parameters such as temperature, humidity, wind speed, cloud
+        cover, solar radiation, and more.
+    - A dedicated page for each day in the dataset, containing:
+        - A table of all available data points for that day
+        - Units for each parameter
+        - A placeholder section for future analytical commentary
+
+    The function uses the FPDF library for layout and formatting, applying
+    consistent fonts, column widths, and centered table positioning.
+
+Behavior
+--------
+- If the dataset contains no values for a given field, that field is skipped.
+- Units are automatically matched to each parameter.
+- The output file is saved automatically, and a confirmation message is printed
+    after successful creation.
+
+Exports
+-------
+__all__ = ["pdf_log_file"]
+    Makes the PDF generator available for import from this module.
+
+"""
+
+
 from ...classes.ConsolColor import *
 from ..env_loader.Load_ENV_variable import *
 from ..wrappers import *
