@@ -1,3 +1,63 @@
+"""
+Interactive console selection of logging file extensions.
+
+This module provides the `ask_for_log_file_extention` function, which displays a
+list of available logging formats (PDF and JSON) and allows the user to select
+one or both. The user may enter the keyword "all", a comma‑separated list of
+indices, or press Enter to leave the selection empty. Input is validated and
+appropriate feedback is shown using colored console messages.
+
+Helper Functions
+----------------
+_listOptions():
+    Prints the list of available logging extensions with numbered indices and
+    instructions for how to select them.
+
+_userInputIsEmpty(user_input: str) -> bool:
+    Returns True if the user submitted an empty string.
+
+_userInputIsAll(user_input: str) -> bool:
+    Returns True if the user typed "all", indicating that all extensions should
+    be selected.
+
+_returnAll() -> list[str]:
+    Returns the complete list of available logging extensions.
+
+_indexIsInRange(index: int) -> bool:
+    Checks whether a numeric index corresponds to a valid extension in the list.
+
+_returnFew(user_input: str) -> list[str]:
+    Parses a comma‑ or semicolon‑separated list of numbers, validates each
+    index, and returns the corresponding extensions. Raises ValueError if any
+    index is invalid.
+
+Main Function
+-------------
+ask_for_log_file_extention() -> list[str] | None:
+    Displays the extension list and prompts the user for input. The function
+    supports three input modes:
+    - "all": selects every available logging extension.
+    - empty input: treated as invalid and triggers an error.
+    - comma‑ or semicolon‑separated numbers: selects specific extensions.
+
+    Returns:
+        A list of selected logging extensions, or None if the input was invalid.
+
+Behavior
+--------
+- Uses colored console messages for prompts, errors, and success feedback.
+- Validates user input thoroughly before returning results.
+- Ensures that only valid extension indices are accepted.
+- Prints a completion message regardless of success or failure.
+
+Exports
+-------
+__all__ = ["ask_for_log_file_extention"]
+    Makes the logging‑extension selection function available for import.
+
+"""
+
+
 from ....classes.ConsolColor import *
 from ....exeptions.Exeptions import *
 
