@@ -1,3 +1,64 @@
+"""
+Interactive console selection of weather‑data parameters.
+
+This module provides the `ask_for_weather_parameters` function, which displays a
+list of available weather fields and allows the user to select specific
+parameters by entering their corresponding numbers, a comma‑separated list, or
+the keyword "all". The function validates the input and returns a list of
+selected parameter names. It uses colored console output for clarity and raises
+errors when the input is invalid.
+
+Helper Functions
+----------------
+_listOptions():
+    Prints the full list of available weather parameters with numbered indices
+    and instructions for how to select them.
+
+_userInputIsEmpty(user_input: str) -> bool:
+    Returns True if the user submitted an empty string.
+
+_userInputIsAll(user_input: str) -> bool:
+    Returns True if the user typed "all", indicating that all parameters should
+    be selected.
+
+_returnAll() -> list[str]:
+    Returns the complete list of available weather parameters.
+
+_indexIsInRange(index: int) -> bool:
+    Checks whether a numeric index corresponds to a valid parameter in the list.
+
+_returnFew(user_input: str) -> list[str]:
+    Parses a comma‑ or semicolon‑separated list of numbers, validates each
+    index, and returns the corresponding parameter names. Raises ValueError if
+    any index is invalid.
+
+Main Function
+-------------
+ask_for_weather_parameters() -> list[str] | None:
+    Displays the parameter list and prompts the user for input. The function
+    supports three input modes:
+    - "all": selects every available parameter.
+    - empty input: treated as invalid and triggers an error.
+    - comma‑ or semicolon‑separated numbers: selects specific parameters.
+
+    Returns:
+        A list of selected parameter names, or None if the input was invalid.
+
+Behavior
+--------
+- Uses colored console messages for prompts, errors, and success feedback.
+- Validates user input thoroughly before returning results.
+- Ensures that only valid parameter indices are accepted.
+- Prints a completion message regardless of success or failure.
+
+Exports
+-------
+__all__ = ["ask_for_weather_parameters"]
+    Makes the parameter‑selection function available for import.
+
+"""
+
+
 from ....classes.ConsolColor import *
 from ....exeptions.Exeptions import *
 
