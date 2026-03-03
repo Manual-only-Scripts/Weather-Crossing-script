@@ -1,3 +1,40 @@
+"""
+Represents a simple calendar date with year, month, and day components.
+
+The `Date` class provides a lightweight structure for storing and accessing
+date information. It uses `__slots__` for memory efficiency and exposes
+properties for controlled access to the year, month, and day fields. The class
+is primarily used for constructing API query parameters and formatting dates
+in a consistent way across the application.
+
+Attributes
+----------
+year : int
+    The calendar year.
+month : int
+    The calendar month (1–12).
+day : int
+    The day of the month.
+
+Behavior
+--------
+- Stores date components as integers.
+- Provides property getters and setters for each field.
+- Formats itself as a string in `YYYY-M-M` format via `__str__`.
+
+Example
+-------
+>>> d = Date(2026, 3, 15)
+>>> str(d)
+'2026-3-15'
+
+Exports
+-------
+__all__ = ["Date"]
+    Makes the Date class available for import.
+"""
+
+
 class Date:
     __slots__ = ["_year", "_month", "_day"]
 
