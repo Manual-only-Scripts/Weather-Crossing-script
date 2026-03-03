@@ -1,3 +1,54 @@
+"""
+Provides utilities for generating colored console text using RGB values or predefined color presets.
+
+The `ConsolColor` class offers static methods for applying ANSI color codes to
+text, enabling visually distinct console output. It supports both fully custom
+RGB colors and a set of predefined semantic color types used throughout the
+application to highlight tips, warnings, errors, and system messages.
+
+Methods
+-------
+CustomColoredText(text: str, r: int, g: int, b: int) -> str:
+    Returns the given text wrapped in ANSI escape codes that apply the specified
+    RGB color. Useful for dynamic or custom color styling.
+
+PreSetUpColoredTextLine(text: str, textType: str) -> str:
+    Returns the text colored according to one of the predefined semantic color
+    types. These presets are used to maintain consistent visual meaning across
+    the application.
+
+    Available textType values:
+    - "ni_tips" — not‑important tips (black)
+    - "i_tips" — important tips (light gray)
+    - "s_color" — system default color (gray)
+    - "is_color" — important system color (white)
+    - "p_error" — possible error (yellow)
+    - "warning" — warning (orange)
+    - "danger" — danger (red)
+    - "success" — success (green)
+    - "info" — informational message (blue)
+
+PreSetUpColorStart(textType: str) -> str:
+    Returns only the ANSI start code for the given color preset. This is useful
+    when constructing multi‑part colored messages manually.
+
+PreSetUpColorEnd() -> str:
+    Returns the ANSI reset code to end a colored text segment.
+
+Behavior
+--------
+- All methods return strings containing ANSI escape sequences compatible with
+    most terminals.
+- Color presets ensure consistent styling across the application.
+- The class is fully static and does not require instantiation.
+
+Exports
+-------
+__all__ = ["ConsolColor"]
+    Makes the color utility class available for import.
+"""
+
+
 from colorama import Style
 
 class ConsolColor:
