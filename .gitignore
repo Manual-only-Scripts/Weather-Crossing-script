@@ -2,3 +2,5 @@
 *.json
 *.pdf
 __pycache__
+
+main.py
