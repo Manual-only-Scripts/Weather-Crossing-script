@@ -44,8 +44,7 @@ from .process.wrappers import *
 
 from .process.inputs import *
 
-from .process.env_loader.Load_ENV_file import *
-from .process.env_loader.Load_ENV_variable import *
+from .process.env_loader import *
 
 from .process.loggers.JSON_log_file import *
 from .process.loggers.PDF_log_file import *
