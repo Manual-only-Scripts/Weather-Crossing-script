@@ -47,51 +47,6 @@ The project is built with:
 
 ---
 
-## 📁 Project Structure
-
-Weather-Crossing-script/
-│
-├── src/
-│   ├── classes/
-│   │   ├── ConsolColor.py
-│   │   ├── Coordinate.py
-│   │   └── Date.py
-│   │
-│   ├── exeptions/
-│   │   └── Exeptions.py
-│   │
-│   ├── env_loader/
-│   │   ├── Load_ENV_file.py
-│   │   └── Load_ENV_variable.py
-│   │
-│   ├── inputs/
-│   │   ├── simple/
-│   │   │   ├── Ask_Coordinate.py
-│   │   │   ├── Ask_Date.py
-│   │   │   └── Ask_UnitGroup.py
-│   │   └── complex/
-│   │       ├── Ask_Weather_Parameters.py
-│   │       └── Ask_Log_File_Extention.py
-│   │
-│   ├── url/
-│   │   └── URL_generator.py
-│   │
-│   ├── api/
-│   │   └── Fetch_API.py
-│   │
-│   └── wrappers/
-│       └── (timer, tryer decorators)
-│
-├── .env
-├── README.md
-└── requirements.txt
-
-Kód
-
----
-
----
-
 ## ⚙️ Installation
 
 ### 1. Clone the repository
