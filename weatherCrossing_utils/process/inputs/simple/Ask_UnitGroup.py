@@ -30,7 +30,7 @@ __all__ = ["ask_for_unitGroup"]
 """
 
 
-from ....classes.ConsolColor import *
+from ....classes import *
 from ...wrappers import *
 
 @tryer

@@ -29,7 +29,7 @@ __all__ = ["Load_env_file"]
 """
 
 
-from ...classes.ConsolColor import *
+from ...classes import *
 from ..wrappers import *
 
 from dotenv import load_dotenv

@@ -34,7 +34,7 @@ __all__ = ["json_log_file"]
 """
 
 
-from ...classes.ConsolColor import *
+from ...classes import *
 from ..env_loader.Load_ENV_variable import *
 from ..wrappers import *
 

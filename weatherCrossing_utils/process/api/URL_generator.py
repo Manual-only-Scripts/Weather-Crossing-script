@@ -56,7 +56,7 @@ from ..inputs.simple.Ask_Coordinate import *
 from ..inputs.simple.Ask_UnitGroup import *
 from ..inputs.simple.Ask_Date import *
 from ...exeptions.Exeptions import *
-from ...classes.ConsolColor import *
+from ...classes import *
 from ..wrappers import *
 
 

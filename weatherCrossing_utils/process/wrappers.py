@@ -33,7 +33,7 @@ __all__ = ["timer", "tryer"]
 """
 
 
-from ..classes.ConsolColor import *
+from ..classes import *
 from ..exeptions.Exeptions import *
 
 import time

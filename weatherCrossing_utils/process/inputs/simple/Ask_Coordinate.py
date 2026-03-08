@@ -33,8 +33,7 @@ __all__ = ["ask_for_cordinate"]
 """
 
 
-from ....classes.ConsolColor import *
-from ....classes.Coordinate import *
+from ....classes import *
 from ...wrappers import *
 
 @tryer

@@ -59,7 +59,7 @@ __all__ = ["ask_for_weather_parameters"]
 """
 
 
-from ....classes.ConsolColor import *
+from ....classes import *
 from ....exeptions.Exeptions import *
 
 option_list: list[str] = ["Datetime","temp","tempmax","tempmin","dew","humidity","precip","windgust","windspeed","cloudcover","solarradiation","solarenergy","uvindex","visibility"]

@@ -45,7 +45,7 @@ __all__ = ["pdf_log_file"]
 """
 
 
-from ...classes.ConsolColor import *
+from ...classes import *
 from ..env_loader.Load_ENV_variable import *
 from ..wrappers import *
 

@@ -34,7 +34,7 @@ __all__ = ["fetch_api"]
 
 
 from ...exeptions.Exeptions import *
-from ...classes.ConsolColor import *
+from ...classes import *
 from .URL_generator import *
 from ..wrappers import *
 

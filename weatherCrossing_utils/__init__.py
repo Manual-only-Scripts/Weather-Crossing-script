@@ -38,9 +38,7 @@ loaded.
 
 """
 
-from .classes.ConsolColor import *
-from .classes.Coordinate import *
-from .classes.Date import *
+from .classes import *
 
 from .process.wrappers import *
 

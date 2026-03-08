@@ -44,7 +44,7 @@ __all__ = ["ask_for_Date"]
 """
 
 
-from ....classes.ConsolColor import *
+from ....classes import *
 from ....exeptions.Exeptions import *
 from ....classes.Date import *
 from ...wrappers import *

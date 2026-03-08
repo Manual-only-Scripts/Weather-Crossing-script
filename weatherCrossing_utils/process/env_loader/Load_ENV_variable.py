@@ -31,7 +31,7 @@ __all__ = ["Load_env_variable"]
 """
 
 
-from ...classes.ConsolColor import *
+from ...classes import *
 from ..wrappers import *
 
 import os

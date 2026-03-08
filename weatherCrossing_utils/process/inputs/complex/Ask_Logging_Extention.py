@@ -58,7 +58,7 @@ __all__ = ["ask_for_log_file_extention"]
 """
 
 
-from ....classes.ConsolColor import *
+from ....classes import *
 from ....exeptions.Exeptions import *
 
 option_list: list[str] = ["pdf","json"]
