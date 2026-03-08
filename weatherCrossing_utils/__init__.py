@@ -42,12 +42,7 @@ from .classes import *
 
 from .process.wrappers import *
 
-from .process.inputs.simple.Ask_Coordinate import *
-from .process.inputs.simple.Ask_Date import *
-from .process.inputs.simple.Ask_UnitGroup import *
-
-from .process.inputs.complex.Ask_Logging_Extention import *
-from .process.inputs.complex.Ask_Weather_Parameters import *
+from .process.inputs import *
 
 from .process.env_loader.Load_ENV_file import *
 from .process.env_loader.Load_ENV_variable import *
