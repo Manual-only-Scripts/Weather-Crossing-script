@@ -49,8 +49,7 @@ from .process.env_loader import *
 from .process.loggers.JSON_log_file import *
 from .process.loggers.PDF_log_file import *
 
-from .process.api.URL_generator import *
-from .process.api.FETCH_api import *
+from .process.api import *
 
 from .Main_process import *
 
