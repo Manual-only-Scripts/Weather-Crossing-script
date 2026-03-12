@@ -58,7 +58,10 @@ def _dayIsInRange(year: int, month: int, day: int) -> bool:
     return day < 1 or day > calendar.monthrange(year, month)[1]
 
 @tryer
-def ask_for_Date() -> Date:
+def ask_for_Date(project: Project) -> Date:
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
     year: int = int(input(ConsolColor.PreSetUpColoredTextLine("Enter year (e.g., 2026): ", "s_color")))
     month: int = int(input(ConsolColor.PreSetUpColoredTextLine("Enter month (1-12): ", "s_color")))
     day: int = int(input(ConsolColor.PreSetUpColoredTextLine(f"Enter day (1-{calendar.monthrange(year, month)[1]}): ", "s_color")))
