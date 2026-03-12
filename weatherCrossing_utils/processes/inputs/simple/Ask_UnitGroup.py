@@ -32,14 +32,18 @@ __all__ = ["ask_for_unitGroup"]
 
 from ....classes import *
 from ...wrappers import *
+from ....exeptions import *
 
 @tryer
-def ask_for_unitGroup() -> str:
+def ask_for_unitGroup(project: Project) -> str | None:
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
     unit_group: str = input(ConsolColor.PreSetUpColoredTextLine("Enter the unit group (metric/imperial): ", "s_color")).strip().lower()
 
     if unit_group not in ["metric", "imperial"]:
         raise ValueError("Unit group must be metric or imperial.")
     
-    return unit_group
+    project.unitGroup = unit_group
 
 __all__ = ["ask_for_unitGroup"]
