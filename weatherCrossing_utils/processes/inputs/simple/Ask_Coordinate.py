@@ -35,12 +35,16 @@ __all__ = ["ask_for_cordinate"]
 
 from ....classes import *
 from ...wrappers import *
+from ....exeptions import *
 
 @tryer
-def ask_for_cordinate() -> Coordinate:
+def ask_for_cordinate(project: Project) -> Coordinate | None:
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
     lon: float = float(input(ConsolColor.PreSetUpColoredTextLine("Enter longitude: ", "s_color")))
     lat: float = float(input(ConsolColor.PreSetUpColoredTextLine("Enter latitude: ", "s_color")))
 
-    return Coordinate(lon, lat)
+    project.coordinate = Coordinate(lon, lat)
 
 __all__ = ["ask_for_cordinate"]
