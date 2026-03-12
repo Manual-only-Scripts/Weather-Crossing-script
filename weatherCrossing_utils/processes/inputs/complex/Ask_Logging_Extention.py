@@ -61,7 +61,7 @@ __all__ = ["ask_for_log_file_extention"]
 from ....classes import *
 from ....exeptions import *
 
-option_list: list[str] = ["pdf","json"]
+option_list: list[str] = ["pdf","json","csv", "xlsx"]
 
 def _listOptions():
     print(ConsolColor.PreSetUpColoredTextLine("What do you need from the list:", "s_color"))
