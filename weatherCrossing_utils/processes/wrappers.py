@@ -43,7 +43,7 @@ def timer(func):
         start: float = time.time()
         result = func(*args, **kwargs)
         end: float = time.time()
-        print(f"Took {end-start:.8f} second\n\n")
+        print(f"Took {end-start:.8f} second{'\n'*6}")
         return result
     return wrapper
 
@@ -63,7 +63,6 @@ def tryer(func):
 
         finally:
             print(ConsolColor.PreSetUpColoredTextLine("Operation ended.", "info"))
-            print("\n"*4)
     return wrapper
 
 __all__ = ["timer", "tryer"]
