@@ -40,8 +40,9 @@ loaded.
 
 from .classes import *
 
-from .process import *
+from .processes import *
 
 from .Main_process import *
 
-print(ConsolColor.PreSetUpColoredTextLine(f"{'\n'*5}The utils have been loaded.{'\n'*5}".upper(), "success"))
+
+print(ConsolColor.PreSetUpColoredTextLine(f"The utils have been loaded.{'\n'*5}".upper(), "success"))
