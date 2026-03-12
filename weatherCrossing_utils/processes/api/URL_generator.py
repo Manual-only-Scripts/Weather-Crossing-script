@@ -58,9 +58,11 @@ from ..wrappers import *
 
 @timer
 @tryer
-def url_generator(project:Project) -> str:
-    
-    parameters: list = [Project.coordinate, Project.startDate, Project.endDate, Project.unitGroup, Project.weatherParams]
+def url_generator(project:Project) -> str | None:
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
+    parameters: list = [project.coordinate, project.startDate, project.endDate, project.unitGroup, project.weatherParams]
     for i in parameters:
         if i is None:
             WrongValueExeption("Wrong input type")
@@ -68,7 +70,6 @@ def url_generator(project:Project) -> str:
     weather_param: list[str] | str = parameters[4] if parameters[4] is not None else ""
 
     url: str = f"{Load_env_variable("API_URL")}{parameters[0]}/{parameters[1]}/{parameters[2]}?key={Load_env_variable("API_KEY")}&include=days&unitGroup={parameters[3]}&elements={','.join(weather_param)}"
-    
-    return url
+    project.url = url
 
 __all__ = ["url_generator"]
