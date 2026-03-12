@@ -48,9 +48,9 @@ def _OutPutDirExists() -> bool:
 def _LoggingWaySelection(project: Project):
     match ask_for_log_file_extention():
             case ["pdf"]:
-                pdf_log_file(fetch_api(project))
+                pdf_log_file(project)
             case ["json"]:
-                json_log_file(fetch_api(project))
+                json_log_file(project)
             case ["pdf", "json"]:
                 data = fetch_api(project)
                 pdf_log_file(project)
@@ -71,6 +71,15 @@ def main_process():
 
     while True:
         project:Project = Project()
+
+        ask_for_cordinate(project)
+        project.startDate = ask_for_Date(project)
+        project.endDate = ask_for_Date(project)
+        ask_for_unitGroup(project)
+        ask_for_weather_parameters(project)
+
+        url_generator(project)
+        fetch_api(project)
 
         _LoggingWaySelection(project)
 
