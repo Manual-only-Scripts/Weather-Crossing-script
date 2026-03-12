@@ -38,33 +38,28 @@ workflow. The process continues until the user explicitly stops it.
 """
 
 
-from .process.inputs.complex.Ask_Logging_Extention import *
-from .process.env_loader.Load_ENV_variable import *
-from .process.env_loader.Load_ENV_file import *
-from .process.loggers.JSON_log_file import *
-from .process.loggers.PDF_log_file import *
-from .process.api.FETCH_api import *
-from .process.wrappers import *
-
+from .classes import *
+from .processes import *
 import os
 
 def _OutPutDirExists():
     return os.path.exists(f"{Load_env_variable('OUT_PATH')}") or os.makedirs(f"{Load_env_variable('OUT_PATH')}")
 
-def _LoggingWaySelection():
+def _LoggingWaySelection(project: Project):
     match ask_for_log_file_extention():
             case ["pdf"]:
-                pdf_log_file(fetch_api())
+                pdf_log_file(fetch_api(project))
             case ["json"]:
-                json_log_file(fetch_api())
+                json_log_file(fetch_api(project))
             case ["pdf", "json"]:
-                data = fetch_api()
-                pdf_log_file(data)
-                json_log_file(data)
+                data = fetch_api(project)
+                pdf_log_file(project)
+                json_log_file(project)
             case _:
                 print(ConsolColor.PreSetUpColoredTextLine("No logging way is selected. No logging will be done.", "warning"))
 
 def main_process():
+    print("Main file run")
     Load_env_file()
 
     if _OutPutDirExists():
@@ -75,11 +70,16 @@ def main_process():
     #    os.makedirs(f"{Load_env_variable('OUT_PATH')}")
 
     while True:
-        _LoggingWaySelection()
+        project:Project = Project()
+
+        _LoggingWaySelection(project)
 
         can_go = input(ConsolColor.PreSetUpColoredTextLine("Do you want to fech more data from the API? (yes | no)\n?.:", "s_color")).strip().lower()
 
         if can_go == "no":
             break
+
+        del project
+
 
 __all__ = ["main_process"]
