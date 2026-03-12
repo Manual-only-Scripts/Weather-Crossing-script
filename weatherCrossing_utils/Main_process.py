@@ -42,8 +42,8 @@ from .classes import *
 from .processes import *
 import os
 
-def _OutPutDirExists():
-    return os.path.exists(f"{Load_env_variable('OUT_PATH')}") or os.makedirs(f"{Load_env_variable('OUT_PATH')}")
+def _OutPutDirExists() -> bool:
+    return os.path.exists(f"{Load_env_variable('OUT_PATH')}")
 
 def _LoggingWaySelection(project: Project):
     match ask_for_log_file_extention():
@@ -65,9 +65,9 @@ def main_process():
     if _OutPutDirExists():
         print(ConsolColor.PreSetUpColoredTextLine(f"Output directory is ready at: {Load_env_variable('OUT_PATH')}", "success"))
     
-    #else:
-    #    print(ConsolColor.PreSetUpColoredTextLine(f"Failed to create output directory at: {Load_env_variable('OUT_PATH')}", "danger"))
-    #    os.makedirs(f"{Load_env_variable('OUT_PATH')}")
+    else:
+        print(ConsolColor.PreSetUpColoredTextLine(f"Failed to create output directory at: {Load_env_variable('OUT_PATH')}", "warning"))
+        os.makedirs(f"{Load_env_variable('OUT_PATH')}")
 
     while True:
         project:Project = Project()
