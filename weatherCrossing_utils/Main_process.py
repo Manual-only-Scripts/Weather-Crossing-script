@@ -51,10 +51,16 @@ def _LoggingWaySelection(project: Project):
                 pdf_log_file(project)
             case ["json"]:
                 json_log_file(project)
-            case ["pdf", "json"]:
+            case ["csv"]:
+                csv_log_file(project)
+            case ["xlsx"]:
+                xlsx_log_file(project)
+            case ["pdf", "json", "csv", "xlsx"]:
                 data = fetch_api(project)
                 pdf_log_file(project)
                 json_log_file(project)
+                csv_log_file(project)
+                xlsx_log_file(project)
             case _:
                 print(ConsolColor.PreSetUpColoredTextLine("No logging way is selected. No logging will be done.", "warning"))
 
