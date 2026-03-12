@@ -108,9 +108,9 @@ class ConsolColor:
             case "p_error":
                 Color = f"\x1b[38;2;255;230;0m"
             case "warning":
-                Color = f"\x1b[38;2;255;100;0m"
+                Color = f"\x1b[38;2;255;100;0m [!!! WARNING !!!]"
             case "danger":
-                Color = f"\x1b[38;2;255;0;0m"
+                Color = f"\x1b[38;2;255;0;0m [!!! DANGER !!!]"
             case "success":
                 Color = f"\x1b[38;2;0;255;0m"
             case "info":
@@ -155,9 +155,9 @@ class ConsolColor:
             case "p_error":
                 Color = f"\x1b[38;2;255;230;0m"
             case "warning":
-                Color = f"\x1b[38;2;255;100;0m"
+                Color = f"\x1b[38;2;255;100;0m [!!! WARNING !!!]"
             case "danger":
-                Color = f"\x1b[38;2;255;0;0m"
+                Color = f"\x1b[38;2;255;0;0m [!!! DANGER !!!]"
             case "info":
                 Color = f"\x1b[38;2;0;0;255m"
 
