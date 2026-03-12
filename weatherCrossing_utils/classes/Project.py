@@ -1,7 +1,7 @@
-from ..classes import *
+from ..classes import Coordinate, Date
 
 class Project:
-    __slots__ = ["_coordinates", "_startDate", "_endDate", "_isGood", "_loggingFile", "_unitGroup"]
+    __slots__ = ["_coordinates", "_startDate", "_endDate", "_isGood", "_loggingFile", "_unitGroup", "_url", "_data"]
 
     def __init__(self, good: bool = True):
         self._isGood: bool = good
@@ -11,6 +11,10 @@ class Project:
         self._loggingFile: str
         self._unitGroup: str
         self._weatherParams: str
+
+        self._url: str
+
+        self.data: dict
 
     @property
     def coordinate(self) -> Coordinate:
@@ -66,5 +70,21 @@ class Project:
     @property
     def weatherParams(self):
         return self._weatherParams
+    
+    @property
+    def url(self) -> str:
+        return self._url
+
+    @url.setter
+    def url(self, value: str):
+        self._url = value
+    
+    @property
+    def project_data(self) -> dict:
+        return self._data
+
+    @project_data.setter
+    def project_data(self, value: dict):
+        self._data = value
 
 __all__ = ["Project"]
