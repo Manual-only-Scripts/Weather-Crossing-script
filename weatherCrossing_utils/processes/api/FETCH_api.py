@@ -43,6 +43,9 @@ import requests
 @timer
 @tryer
 def fetch_api(project: Project):
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
     url = project.url
 
     if url is None:
@@ -55,6 +58,6 @@ def fetch_api(project: Project):
     if response.status_code != 200:
         raise Exception(f"API request failed with status code {response.status_code}")
 
-    return response.json()
+    project.project_data = response.json()
 
 __all__ = ["fetch_api"]
