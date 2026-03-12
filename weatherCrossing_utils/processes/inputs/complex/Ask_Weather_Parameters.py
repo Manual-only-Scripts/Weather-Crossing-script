@@ -95,34 +95,42 @@ def _returnFew(user_input) -> list[str]:
     
     return selected_options
 
-def ask_for_weather_parameters() -> list[str] | None:
+def ask_for_weather_parameters(project: Project) -> list[str] | None:
+    if not project.isGood:
+        WrongValueExeption("The project is not good for process!")
+
     _listOptions()
 
     try:
         user_input: str = input(ConsolColor.PreSetUpColoredTextLine("?.: ", "s_color")).strip().lower()
-
+        print(_userInputIsAll(user_input))
         if _userInputIsAll(user_input):
+            print("all")
             print(ConsolColor.PreSetUpColoredTextLine(f"Weather parameters is selected. ({user_input})", "success"))
-            return _returnAll()
+            project.weatherParams = _returnAll()
+            return None
         
         if _userInputIsEmpty(user_input):
             WrongValueExeption("Parameters is empty.")
 
     except ValueError as ve:
         print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
-        return None
+        project.isGoodSwitch()
 
     else:
+        if not project.isGood:
+            WrongValueExeption("The project is not good for process!")
+
         try:
-            _returnFew(user_input)
+            project.weatherParams = _returnFew(user_input)
 
         except ValueError as ve:
             print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
-            return None
+            project.isGoodSwitch()
 
         else:
             print(ConsolColor.PreSetUpColoredTextLine(f"Successful Weather parameters selection. ({user_input})", "success"))
-            return selected_options
+            project.weatherParams = selected_options
 
     finally:
         print(ConsolColor.PreSetUpColoredTextLine("Weather parameters input attempt completed.", "info"))
