@@ -1,21 +1,21 @@
 from ..classes import Coordinate, Date
 
 class Project:
-    __slots__ = ["_coordinates", "_startDate", "_endDate", "_isGood", "_loggingFile", "_unitGroup", "_url", "_data"]
+    __slots__ = ["_coordinates", "_startDate", "_endDate", "_isGood", "_unitGroup", "_weatherParams", "_url", "_data"]
 
     def __init__(self, good: bool = True):
         self._isGood: bool = good
         self._coordinates: Coordinate
         self._startDate: Date
         self._endDate: Date
-        self._loggingFile: str
         self._unitGroup: str
-        self._weatherParams: str
+        self._weatherParams: list
 
         self._url: str
 
         self.data: dict
 
+    #region
     @property
     def coordinate(self) -> Coordinate:
         return self._coordinates
@@ -34,7 +34,7 @@ class Project:
 
     @property
     def endDate(self) -> Date:
-        return self._startDate
+        return self._endDate
 
     @endDate.setter
     def endDate(self, value: Date):
@@ -52,14 +52,6 @@ class Project:
         self._isGood = not self._isGood
 
     @property
-    def loggingFile(self) -> str:
-        return self._loggingFile
-
-    @loggingFile.setter
-    def loggingDile(self, value: str):
-        self._loggingFile = value
-
-    @property
     def unitGroup(self) -> str:
         return self._unitGroup
 
@@ -70,7 +62,11 @@ class Project:
     @property
     def weatherParams(self):
         return self._weatherParams
-    
+
+    @weatherParams.setter
+    def weatherParams(self, value: list):
+        self._weatherParams = value
+
     @property
     def url(self) -> str:
         return self._url
@@ -86,5 +82,9 @@ class Project:
     @project_data.setter
     def project_data(self, value: dict):
         self._data = value
+    #endregion
+
+    def __repr__(self) -> str:
+        return f"Project.:\n\t-{self._isGood}\n\t-{self._coordinates}\n\t-{self._startDate}\n\t-{self._endDate}\n\t-{self._unitGroup}\n\t-{self._weatherParams}\n\t-{self._url}\n\t-{self._data}"#\n\t-{self.}
 
 __all__ = ["Project"]
