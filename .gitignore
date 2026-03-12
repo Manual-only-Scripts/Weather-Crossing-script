@@ -1,6 +1,8 @@
 *.env
 *.json
 *.pdf
+*.csv
+*.xlsx
 __pycache__
 
 main.py
