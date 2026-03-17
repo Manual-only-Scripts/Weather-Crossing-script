@@ -42,7 +42,7 @@ from .classes import *
 
 from .processes import *
 
-from .Main_process import *
+from .Manual_process import *
 
 
 print(ConsolColor.PreSetUpColoredTextLine(f"The utils have been loaded.{'\n'*5}".upper(), "success"))
