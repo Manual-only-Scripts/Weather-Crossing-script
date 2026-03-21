@@ -51,6 +51,7 @@ from ..wrappers import *
 
 from fpdf import FPDF
 
+@spacing
 @timer
 @tryer
 def pdf_log_file(project: Project):
