@@ -64,7 +64,7 @@ def _LoggingWaySelection(project: Project):
             case _:
                 print(ConsolColor.PreSetUpColoredTextLine("No logging way is selected. No logging will be done.", "warning"))
 
-def main_process():
+def main_manual_process():
     print("Main file run")
     Load_env_file()
 
@@ -97,4 +97,4 @@ def main_process():
         del project
 
 
-__all__ = ["main_process"]
+__all__ = ["main_manual_process"]
