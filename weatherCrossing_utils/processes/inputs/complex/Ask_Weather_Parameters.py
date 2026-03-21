@@ -62,13 +62,9 @@ __all__ = ["ask_for_weather_parameters"]
 from ....classes import *
 from ....exeptions import *
 
-option_list: list[str] = ["Datetime","temp","tempmax","tempmin","dew","humidity","precip","windgust","windspeed","cloudcover","solarradiation","solarenergy","uvindex","visibility"]
+import questionary
 
-def _listOptions():
-    print(ConsolColor.PreSetUpColoredTextLine("What do you need from the list:", "s_color"))
-    for optionIndex in range(len(option_list)):
-        print(ConsolColor.PreSetUpColoredTextLine(f"\t{optionIndex+1})- {option_list[optionIndex]}", "s_color"))
-    print(ConsolColor.PreSetUpColoredTextLine("Type the numbers of the options you need separated by commas (e.g., 1,3,5) or type all if you need all. If you want to leave press enter.:", "s_color"))
+option_list: list[str] = ["datetime","temp","tempmax","tempmin","dew","humidity","precip","windgust","windspeed","cloudcover","solarradiation","solarenergy","uvindex","visibility"]
 
 def _userInputIsEmpty(user_input: str)-> bool:
     return user_input == ""
@@ -99,13 +95,13 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
     if not project.isGood:
         WrongValueExeption("The project is not good for process!")
 
-    _listOptions()
-
     try:
-        user_input: str = input(ConsolColor.PreSetUpColoredTextLine("?.: ", "s_color")).strip().lower()
-        print(_userInputIsAll(user_input))
+        user_input: str = questionary.select(
+                "Choose from the parameters:",
+                choices= ["Datetime","Temp","Tempmax","Tempmin","Dew","Humidity","Precip","Windgust","Windspeed","Cloudcover","Solarradiation","Solarenergy","Uvindex","Visibility","All","Custom - (Not Implemented yet)"]
+            ).ask().lower()
+
         if _userInputIsAll(user_input):
-            print("all")
             print(ConsolColor.PreSetUpColoredTextLine(f"Weather parameters is selected. ({user_input})", "success"))
             project.weatherParams = _returnAll()
             return None
