@@ -164,7 +164,7 @@ def pdf_log_file(project: Project):
         pdf.add_page()
 
         pdf.set_font("Courier", "B", 16)
-        pdf.cell(0, 10, f"Summary table for {day.get('Datetime', 'N/A')}", ln=True, align="C")
+        pdf.cell(0, 10, f"Summary table for {day.get('datetime', 'N/A')}", ln=True, align="C")
         pdf.ln(3)
 
         col_widths = [60, 40, 30]
