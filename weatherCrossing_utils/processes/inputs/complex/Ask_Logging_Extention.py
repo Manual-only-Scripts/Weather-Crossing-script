@@ -61,13 +61,9 @@ __all__ = ["ask_for_log_file_extention"]
 from ....classes import *
 from ....exeptions import *
 
-option_list: list[str] = ["pdf","json","csv", "xlsx"]
+import questionary
 
-def _listOptions():
-    print(ConsolColor.PreSetUpColoredTextLine("What do you need from the list:", "s_color"))
-    for optionIndex in range(len(option_list)):
-        print(ConsolColor.PreSetUpColoredTextLine(f"\t{optionIndex+1})- {option_list[optionIndex]}", "s_color"))
-    print(ConsolColor.PreSetUpColoredTextLine("Type the numbers of the options you need separated by commas (e.g., 1,3,5) or type all if you need all. If you want to leave press enter.:", "s_color"))
+option_list: list[str] = ["pdf","json","csv", "xlsx"]
 
 def _userInputIsEmpty(user_input: str)-> bool:
     return user_input == ""
@@ -95,10 +91,18 @@ def _returnFew(user_input) -> list[str]:
     return selected_options
 
 def ask_for_log_file_extention() -> list[str] | None:
-    _listOptions()
-
     try:
-        user_input: str = input(ConsolColor.PreSetUpColoredTextLine("?.: ", "s_color")).strip().lower()
+        user_input: str = questionary.select(
+            "Choose export file format:",
+            choices=[
+                "PDF",
+                "JSON",
+                "CSV",
+                "XLSX",
+                "All"
+            ]
+        ).ask().lower()
+
 
         if _userInputIsAll(user_input):
             print(ConsolColor.PreSetUpColoredTextLine(f"Logging extention is selected. ({user_input})", "success"))
