@@ -40,6 +40,7 @@ from ..wrappers import *
 
 import requests
 
+@spacing
 @timer
 @tryer
 def fetch_api(project: Project):
