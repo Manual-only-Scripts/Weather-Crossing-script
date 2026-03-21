@@ -40,6 +40,8 @@ workflow. The process continues until the user explicitly stops it.
 
 from .classes import *
 from .processes import *
+
+import questionary
 import os
 
 def _OutPutDirExists() -> bool:
@@ -89,7 +91,13 @@ def main_manual_process():
 
         _LoggingWaySelection(project)
 
-        can_go = input(ConsolColor.PreSetUpColoredTextLine("Do you want to fech more data from the API? (yes | no)\n?.:", "s_color")).strip().lower()
+        can_go = questionary.select(
+            "Do you want to fech more data from the API?:",
+            choices=[
+                "Yes",
+                "No"
+            ]
+        ).ask().lower()
 
         if can_go == "no":
             break
