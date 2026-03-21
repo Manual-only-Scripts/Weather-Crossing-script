@@ -60,6 +60,7 @@ __all__ = ["ask_for_log_file_extention"]
 
 from ....classes import *
 from ....exeptions import *
+from ...wrappers import *
 
 import questionary
 
@@ -90,6 +91,7 @@ def _returnFew(user_input) -> list[str]:
     
     return selected_options
 
+@spacing
 def ask_for_log_file_extention() -> list[str] | None:
     try:
         user_input: str = questionary.select(
@@ -126,8 +128,5 @@ def ask_for_log_file_extention() -> list[str] | None:
         else:
             print(ConsolColor.PreSetUpColoredTextLine(f"Successful Logging extention selection. ({user_input})", "success"))
             return selected_options
-
-    finally:
-        print(ConsolColor.PreSetUpColoredTextLine("Logging extention input attempt completed.", "info"))
 
 __all__ = ["ask_for_log_file_extention"]
