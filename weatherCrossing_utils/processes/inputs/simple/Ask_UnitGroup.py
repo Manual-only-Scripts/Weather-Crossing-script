@@ -34,12 +34,20 @@ from ....classes import *
 from ...wrappers import *
 from ....exeptions import *
 
+import questionary
+
 @tryer
 def ask_for_unitGroup(project: Project) -> str | None:
     if not project.isGood:
         WrongValueExeption("The project is not good for process!")
 
-    unit_group: str = input(ConsolColor.PreSetUpColoredTextLine("Enter the unit group (metric/imperial): ", "s_color")).strip().lower()
+    unit_group: str = questionary.select(
+            "Choose unit type:",
+            choices=[
+                "Metric",
+                "Imperial"
+            ]
+        ).ask().lower()
 
     if unit_group not in ["metric", "imperial"]:
         raise ValueError("Unit group must be metric or imperial.")
