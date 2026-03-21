@@ -4,7 +4,7 @@ from ..wrappers import *
 
 import pandas as pd
 
-# A 'days' lista DataFrame-mé alakítása
+@spacing
 @timer
 @tryer
 def xlsx_log_file(project: Project):
