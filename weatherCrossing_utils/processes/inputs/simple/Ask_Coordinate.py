@@ -37,6 +37,7 @@ from ....classes import *
 from ...wrappers import *
 from ....exeptions import *
 
+@spacing
 @tryer
 def ask_for_cordinate(project: Project) -> Coordinate | None:
     if not project.isGood:
