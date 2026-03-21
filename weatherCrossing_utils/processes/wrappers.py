@@ -43,13 +43,12 @@ def timer(func):
         start: float = time.time()
         result = func(*args, **kwargs)
         end: float = time.time()
-        print(f"Took {end-start:.8f} second{'\n'*6}")
+        print(ConsolColor.PreSetUpColoredTextLine(f"Took {end-start:.10f} second","success"))
         return result
     return wrapper
 
 def tryer(func):
     def wrapper(*args, **kwargs):
-        print(ConsolColor.PreSetUpColoredTextLine("Operation starting", "s_color"))
         try:
             resoult = func(*args, **kwargs)
 
@@ -60,9 +59,14 @@ def tryer(func):
         else:
             print(ConsolColor.PreSetUpColoredTextLine(f"Successful operation is done", "success"))
             return resoult
-
-        finally:
-            print(ConsolColor.PreSetUpColoredTextLine("Operation ended.", "info"))
     return wrapper
 
-__all__ = ["timer", "tryer"]
+def spacing(func):
+    def wrapper(*args, **kwargs):
+        resoult = func(*args, **kwargs)
+        print(f"{'\n'*5}")
+        return resoult
+
+    return wrapper
+
+__all__ = ["timer", "tryer", "spacing"]
