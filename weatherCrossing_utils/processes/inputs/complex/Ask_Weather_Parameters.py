@@ -61,6 +61,7 @@ __all__ = ["ask_for_weather_parameters"]
 
 from ....classes import *
 from ....exeptions import *
+from ...wrappers import *
 
 import questionary
 
@@ -91,6 +92,7 @@ def _returnFew(user_input) -> list[str]:
     
     return selected_options
 
+@spacing
 def ask_for_weather_parameters(project: Project) -> list[str] | None:
     if not project.isGood:
         WrongValueExeption("The project is not good for process!")
@@ -127,8 +129,5 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
         else:
             print(ConsolColor.PreSetUpColoredTextLine(f"Successful Weather parameters selection. ({user_input})", "success"))
             project.weatherParams = selected_options
-
-    finally:
-        print(ConsolColor.PreSetUpColoredTextLine("Weather parameters input attempt completed.", "info"))
 
 __all__ = ["ask_for_weather_parameters"]
