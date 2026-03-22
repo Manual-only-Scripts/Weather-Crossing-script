@@ -49,13 +49,13 @@ def _OutPutDirExists() -> bool:
 
 def _LoggingWaySelection(project: Project):
     match ask_for_log_file_extention():
-            case ["pdf"]:
+            case "pdf":
                 pdf_log_file(project)
-            case ["json"]:
+            case "json":
                 json_log_file(project)
-            case ["csv"]:
+            case "csv":
                 csv_log_file(project)
-            case ["xlsx"]:
+            case "xlsx":
                 xlsx_log_file(project)
             case ["pdf", "json", "csv", "xlsx"]:
                 data = fetch_api(project)
