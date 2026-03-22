@@ -75,22 +75,6 @@ def _userInputIsAll(user_input) -> bool:
 def _returnAll() -> list[str]:
     return option_list
 
-
-selected_options: list[str] = []
-
-def _indexIsInRange(index) -> bool:
-    return 1 <= index <= len(option_list)
-
-def _returnFew(user_input) -> list[str]:
-    selected_indices: list[int] = [int(x.strip()) for x in user_input.split(",") or user_input.split(";")]
-    for index in selected_indices:
-        if _indexIsInRange(index):
-            selected_options.append(option_list[index - 1])
-        else:
-            raise ValueError("Invalid input. Please enter valid option numbers separated by commas, 'all', or press enter to leave:")
-    
-    return selected_options
-
 @spacing
 def ask_for_log_file_extention() -> str | list[str] | None:
     try:
@@ -102,7 +86,7 @@ def ask_for_log_file_extention() -> str | list[str] | None:
                 "CSV",
                 "XLSX",
                 "All",
-                "Custom - (Not Implemented yet)"
+                "Custom"
             ]
         ).ask().lower()
 
@@ -113,6 +97,9 @@ def ask_for_log_file_extention() -> str | list[str] | None:
         
         if user_input in option_list:
             return user_input
+        
+        if user_input == "custom":
+            return "custom"
 
         if _userInputIsEmpty(user_input):
             WrongValueExeption("Extention is empty.")
@@ -120,17 +107,5 @@ def ask_for_log_file_extention() -> str | list[str] | None:
     except ValueError as ve:
         print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
         return None
-
-    else:
-        try:
-            _returnFew(user_input)
-
-        except ValueError as ve:
-            print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
-            return None
-
-        else:
-            print(ConsolColor.PreSetUpColoredTextLine(f"Successful Logging extention selection. ({user_input})", "success"))
-            return selected_options
 
 __all__ = ["ask_for_log_file_extention"]
