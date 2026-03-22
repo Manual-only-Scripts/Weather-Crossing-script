@@ -44,7 +44,7 @@ from ..wrappers import *
 def json_log_file(project: Project):
     print(ConsolColor.PreSetUpColoredTextLine(f"Creating .json file for logging.", "i_tips"))
 
-    with open(f"{Load_env_variable('OUT_PATH')}weather_data_response.json", "w") as file:
-        file.write(str(project.project_data).replace('\'', '"'))
+    with open(f"{Load_env_variable('OUT_PATH')}{project.project_name}weather_data.json", "w") as file:
+        file.write(str(project.project_data).replace('\'', '"').replace('None', 'null'))
 
 __all__ = ["json_log_file"]
