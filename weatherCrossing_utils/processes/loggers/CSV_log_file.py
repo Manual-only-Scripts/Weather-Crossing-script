@@ -10,6 +10,6 @@ import pandas as pd
 def csv_log_file(project: Project):
     df = pd.DataFrame(project.project_data['days'])
 
-    df.to_csv(f"{Load_env_variable('OUT_PATH')}weather.csv", index=False)
+    df.to_csv(f"{Load_env_variable('OUT_PATH')}{project.project_name}weather.csv", index=False)
 
 __all__ = ["csv_log_file"]
