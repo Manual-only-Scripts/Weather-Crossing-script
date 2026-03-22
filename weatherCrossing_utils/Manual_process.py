@@ -47,6 +47,37 @@ import os
 def _OutPutDirExists() -> bool:
     return os.path.exists(f"{Load_env_variable('OUT_PATH')}")
 
+def _custom_select()-> list:
+    choices = [
+        "PDF",
+        "JSON",
+        "CSV",
+        "XLSX"
+    ]
+
+    selected = questionary.checkbox(
+        "Choose from the parameters:",
+        choices=choices
+    ).ask()
+
+    if selected:
+        selected = [item.lower() for item in selected]
+
+    return selected
+
+def _custom_log(project: Project):
+    selected_ways = _custom_select()
+    for i in selected_ways:
+        match i:
+            case "pdf":
+                pdf_log_file(project)
+            case "json":
+                json_log_file(project)
+            case "csv":
+                csv_log_file(project)
+            case "xlsx":
+                xlsx_log_file(project)
+
 def _LoggingWaySelection(project: Project):
     match ask_for_log_file_extention():
             case "pdf":
@@ -63,6 +94,8 @@ def _LoggingWaySelection(project: Project):
                 json_log_file(project)
                 csv_log_file(project)
                 xlsx_log_file(project)
+            case "custom":
+                _custom_log(project)
             case _:
                 print(ConsolColor.PreSetUpColoredTextLine("No logging way is selected. No logging will be done.", "warning"))
 
