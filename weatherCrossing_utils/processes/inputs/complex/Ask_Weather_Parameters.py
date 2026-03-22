@@ -100,7 +100,7 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
     try:
         user_input: str = questionary.select(
                 "Choose from the parameters:",
-                choices= ["Datetime","Temp","Tempmax","Tempmin","Dew","Humidity","Precip","Windgust","Windspeed","Cloudcover","Solarradiation","Solarenergy","Uvindex","Visibility","All","Custom - (Not Implemented yet)"]
+                choices= ["Temp","Tempmax","Tempmin","Dew","Humidity","Precip","Windgust","Windspeed","Cloudcover","Solarradiation","Solarenergy","Uvindex","Visibility","All","Custom - (Not Implemented yet)"]
             ).ask().lower()
 
         if _userInputIsAll(user_input):
@@ -108,6 +108,10 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
             project.weatherParams = _returnAll()
             return None
         
+        if user_input in option_list:
+            project.weatherParams = ["datetime", user_input]
+            return None
+
         if _userInputIsEmpty(user_input):
             WrongValueExeption("Parameters is empty.")
 
