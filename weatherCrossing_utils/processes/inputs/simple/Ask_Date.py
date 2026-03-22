@@ -49,7 +49,33 @@ from ....exeptions import *
 from ....classes import *
 from ...wrappers import *
 
+from datetime import datetime
 import calendar
+import questionary
+
+def _select_year() -> int:
+    year: str = questionary.select(
+            "Choose a year:",
+            choices=[f"{datetime.now().year - i}" for i in range(4)]
+        ).ask().lower()
+    
+    return int(year)
+
+def _select_month() -> int:
+    month: str = questionary.select(
+            "Choose a month:",
+            choices= [f"{i}" for i in range(1,13)]
+        ).ask().lower()
+    
+    return int(month)
+
+def _select_day(year: int, month: int) -> int:
+    day: str = questionary.select(
+            "Choose a day:",
+            choices= [f"{i}" for i in range(1,calendar.monthrange(year, month)[1]+1)]
+        ).ask().lower()
+    
+    return int(day)
 
 def _monthIsInRange(month: int) -> bool:
     return month < 1 or month > 12
@@ -63,9 +89,9 @@ def ask_for_Date(project: Project) -> Date:
     if not project.isGood:
         WrongValueExeption("The project is not good for process!")
 
-    year: int = int(input(ConsolColor.PreSetUpColoredTextLine("Enter year (e.g., 2026): ", "s_color")))
-    month: int = int(input(ConsolColor.PreSetUpColoredTextLine("Enter month (1-12): ", "s_color")))
-    day: int = int(input(ConsolColor.PreSetUpColoredTextLine(f"Enter day (1-{calendar.monthrange(year, month)[1]}): ", "s_color")))
+    year: int = _select_year()
+    month: int = _select_month()
+    day: int = _select_day(year, month)
 
     if _monthIsInRange(month):
         WrongValueExeption("Month must be between 1 and 12.")
