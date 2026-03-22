@@ -76,21 +76,32 @@ def _userInputIsAll(user_input) -> bool:
 def _returnAll() -> list[str]:
     return option_list
 
+def _custom_select()-> list:
+    choices = [
+        "Temp",
+        "Tempmax",
+        "Tempmin",
+        "Dew",
+        "Humidity",
+        "Precip",
+        "Windgust",
+        "Windspeed",
+        "Cloudcover",
+        "Solarradiation",
+        "Solarenergy",
+        "Uvindex",
+        "Visibility"
+    ]
 
-selected_options: list[str] = []
+    selected = questionary.checkbox(
+        "Choose from the parameters:",
+        choices=choices
+    ).ask()
 
-def _indexIsInRange(index) -> bool:
-    return 1 <= index <= len(option_list)
+    if selected:
+        selected = [item.lower() for item in selected]
 
-def _returnFew(user_input) -> list[str]:
-    selected_indices: list[int] = [int(x.strip()) for x in user_input.split(",") or user_input.split(";")]
-    for index in selected_indices:
-        if _indexIsInRange(index):
-            selected_options.append(option_list[index - 1])
-        else:
-            raise ValueError("Invalid input. Please enter valid option numbers separated by commas, 'all', or press enter to leave:")
-    
-    return selected_options
+    return selected
 
 @spacing
 def ask_for_weather_parameters(project: Project) -> list[str] | None:
@@ -100,7 +111,7 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
     try:
         user_input: str = questionary.select(
                 "Choose from the parameters:",
-                choices= ["Temp","Tempmax","Tempmin","Dew","Humidity","Precip","Windgust","Windspeed","Cloudcover","Solarradiation","Solarenergy","Uvindex","Visibility","All","Custom - (Not Implemented yet)"]
+                choices= ["Temp","Tempmax","Tempmin","Dew","Humidity","Precip","Windgust","Windspeed","Cloudcover","Solarradiation","Solarenergy","Uvindex","Visibility","All","Custom"]
             ).ask().lower()
 
         if _userInputIsAll(user_input):
@@ -111,6 +122,14 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
         if user_input in option_list:
             project.weatherParams = ["datetime", user_input]
             return None
+        
+        if user_input == "custom":
+            finalyList: list = ["datetime"]
+            customSelect = _custom_select()
+            for i in customSelect:
+                finalyList.append(i)
+
+            project.weatherParams = finalyList
 
         if _userInputIsEmpty(user_input):
             WrongValueExeption("Parameters is empty.")
@@ -118,20 +137,5 @@ def ask_for_weather_parameters(project: Project) -> list[str] | None:
     except ValueError as ve:
         print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
         project.isGoodSwitch()
-
-    else:
-        if not project.isGood:
-            WrongValueExeption("The project is not good for process!")
-
-        try:
-            project.weatherParams = _returnFew(user_input)
-
-        except ValueError as ve:
-            print(ConsolColor.PreSetUpColoredTextLine(f"Invalid input: {ve}", "danger"))
-            project.isGoodSwitch()
-
-        else:
-            print(ConsolColor.PreSetUpColoredTextLine(f"Successful Weather parameters selection. ({user_input})", "success"))
-            project.weatherParams = selected_options
 
 __all__ = ["ask_for_weather_parameters"]
