@@ -92,7 +92,7 @@ def _returnFew(user_input) -> list[str]:
     return selected_options
 
 @spacing
-def ask_for_log_file_extention() -> list[str] | None:
+def ask_for_log_file_extention() -> str | list[str] | None:
     try:
         user_input: str = questionary.select(
             "Choose export file format:",
@@ -101,7 +101,8 @@ def ask_for_log_file_extention() -> list[str] | None:
                 "JSON",
                 "CSV",
                 "XLSX",
-                "All"
+                "All",
+                "Custom - (Not Implemented yet)"
             ]
         ).ask().lower()
 
@@ -110,6 +111,9 @@ def ask_for_log_file_extention() -> list[str] | None:
             print(ConsolColor.PreSetUpColoredTextLine(f"Logging extention is selected. ({user_input})", "success"))
             return _returnAll()
         
+        if user_input in option_list:
+            return user_input
+
         if _userInputIsEmpty(user_input):
             WrongValueExeption("Extention is empty.")
 
