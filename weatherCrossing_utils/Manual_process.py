@@ -84,6 +84,7 @@ def main_manual_process():
         project.endDate = ask_for_Date(project)
         ask_for_unitGroup(project)
         ask_for_weather_parameters(project)
+        ask_for_project_name(project)
 
         url_generator(project)
         fetch_api(project)
