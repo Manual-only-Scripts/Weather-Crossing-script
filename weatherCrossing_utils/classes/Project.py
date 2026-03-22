@@ -1,9 +1,10 @@
 from ..classes import Coordinate, Date
 
 class Project:
-    __slots__ = ["_coordinates", "_startDate", "_endDate", "_isGood", "_unitGroup", "_weatherParams", "_url", "_data"]
+    __slots__ = ["_name", "_coordinates", "_startDate", "_endDate", "_isGood", "_unitGroup", "_weatherParams", "_url", "_data"]
 
     def __init__(self, good: bool = True):
+        self._name: str
         self._isGood: bool = good
         self._coordinates: Coordinate
         self._startDate: Date
@@ -16,6 +17,14 @@ class Project:
         self.data: dict
 
     #region
+    @property
+    def project_name(self):
+        return self._name
+
+    @project_name.setter
+    def project_name(self, value: str):
+        self._name = value
+
     @property
     def coordinate(self) -> Coordinate:
         return self._coordinates
@@ -85,6 +94,6 @@ class Project:
     #endregion
 
     def __repr__(self) -> str:
-        return f"Project.:\n\t-{self._isGood}\n\t-{self._coordinates}\n\t-{self._startDate}\n\t-{self._endDate}\n\t-{self._unitGroup}\n\t-{self._weatherParams}\n\t-{self._url}\n\t-{self._data}"#\n\t-{self.}
+        return f"Project.:\n\t-{self._name}\n\t-{self._isGood}\n\t-{self._coordinates}\n\t-{self._startDate}\n\t-{self._endDate}\n\t-{self._unitGroup}\n\t-{self._weatherParams}\n\t-{self._url}\n\t-{self._data}"#\n\t-{self.}
 
 __all__ = ["Project"]
