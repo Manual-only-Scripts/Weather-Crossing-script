@@ -206,7 +206,7 @@ def pdf_log_file(project: Project):
         pdf.set_font("Courier", size=10)
         pdf.cell(0, 10, "Not yet implemented", ln=True)
 
-    pdf.output(f"{Load_env_variable('OUT_PATH')}weather_report.pdf")
+    pdf.output(f"{Load_env_variable('OUT_PATH')}{project.project_name}weather_report.pdf")
     print("PDF report created successfully as 'weather_report.pdf'.")
 
 __all__ = ["pdf_log_file"]
