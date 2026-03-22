@@ -11,7 +11,7 @@ def xlsx_log_file(project: Project):
     days = project.project_data['days']
     df = pd.DataFrame(days)
 
-    out_path = f"{Load_env_variable('OUT_PATH')}weather.xlsx"
+    out_path = f"{Load_env_variable('OUT_PATH')}{project.project_name}weather.xlsx"
 
     with pd.ExcelWriter(out_path, engine='openpyxl') as writer:
         df.to_excel(writer, sheet_name="Summary", index=False)
