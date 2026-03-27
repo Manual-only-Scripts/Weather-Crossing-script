@@ -57,7 +57,7 @@ def tryer(func):
             return None
 
         else:
-            print(ConsolColor.PreSetUpColoredTextLine(f"Successful operation is done", "success"))
+            print(ConsolColor.PreSetUpColoredTextLine(f"Successful operation", "success"))
             return resoult
     return wrapper
 
